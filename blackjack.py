@@ -102,7 +102,6 @@ def game():
         move = input("Type 'draw' to draw a card or press 'Enter' to hold\n")
         if move == 'draw':
             hand.draw_card(game_deck)
-            print(hand)
             if checker(hand) + hand.cards[2].value > 21:
                 print('You lose. You went over 21.')
                 inpt = input("Enter Yes if you'd like to play again.\nEnter 'quit' to exit.\n")
@@ -111,12 +110,13 @@ def game():
                 continue
         else:
             pass
+        print(hand, checker(hand), '\n')
 
         #House draws cards based on how many you drew
         for card in range(len(hand.cards)):
             hand_2.draw_card(game_deck)
         house_cards = [str(i) for i in hand_2.cards]
-        print('House Total:\n', checker(hand_2), '\n' + '\n'.join(house_cards))
+        print('House Total:\n' + '\n'.join(house_cards), '\n', checker(hand_2), '\n')
         print()
 
         #Game results
@@ -132,7 +132,7 @@ def game():
         inpt = input("Press 'Enter' if you'd like to play again.\nEnter 'quit' to exit.\n")
         game_deck = Deck()
         hand.cards = []
-        hand_2 = []
+        hand_2.cards = []
         continue
 
 def checker(item):
